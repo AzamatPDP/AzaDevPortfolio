@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="uz" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Portfolio{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Professional dasturchi portfoliosi{% endblock %}">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'display': ['"Space Grotesk"', 'sans-serif'],
+                        'mono': ['"JetBrains Mono"', 'monospace'],
+                        'body': ['"DM Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        'dark': {
+                            900: '#030712',
+                            800: '#0d1117',
+                            700: '#161b22',
+                            600: '#21262d',
+                            500: '#30363d',
+                        },
+                        'accent': {
+                            primary: '#6366f1',
+                            secondary: '#8b5cf6',
+                            glow: '#4f46e5',
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.6s ease forwards',
+                        'pulse-slow': 'pulse 3s ease-in-out infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Devicons for tech logos -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+
+    <style>
+        * { font-family: 'DM Sans', sans-serif; }
+
+        body {
+            background-color: #030712;
+            background-image:
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.12), transparent),
+                radial-gradient(ellipse 40% 30% at 80% 80%, rgba(139, 92, 246, 0.07), transparent);
+        }
+
+        h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; }
+
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1 0%, #a78bfa 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Glow effect */
+        .glow-indigo {
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.25), 0 0 60px rgba(99, 102, 241, 0.1);
+        }
+
+        .glow-text {
+            text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+        }
+
+        /* Card hover effect */
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(99, 102, 241, 0.15);
+        }
+
+        /* Skill bar animation */
+        .skill-bar {
+            transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Nav blur */
+        .nav-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        /* Grid pattern */
+        .grid-bg {
+            background-image: linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #030712; }
+        ::-webkit-scrollbar-thumb { background: #6366f1; border-radius: 10px; }
+
+        /* Animate on scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Active nav link */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #6366f1;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        /* Tag pill colors */
+        .tag-indigo { background: rgba(99,102,241,0.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.3); }
+        .tag-emerald { background: rgba(16,185,129,0.15); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.3); }
+        .tag-rose { background: rgba(244,63,94,0.15); color: #fda4af; border: 1px solid rgba(244,63,94,0.3); }
+        .tag-amber { background: rgba(245,158,11,0.15); color: #fcd34d; border: 1px solid rgba(245,158,11,0.3); }
+        .tag-sky { background: rgba(14,165,233,0.15); color: #7dd3fc; border: 1px solid rgba(14,165,233,0.3); }
+        .tag-violet { background: rgba(139,92,246,0.15); color: #c4b5fd; border: 1px solid rgba(139,92,246,0.3); }
+        .tag-orange { background: rgba(249,115,22,0.15); color: #fdba74; border: 1px solid rgba(249,115,22,0.3); }
+        .tag-teal { background: rgba(20,184,166,0.15); color: #5eead4; border: 1px solid rgba(20,184,166,0.3); }
+    </style>
+</head>
+<body class="text-gray-100 min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur border-b border-gray-800/50"
+         style="background: rgba(3, 7, 18, 0.85);">
+        <div class="max-w-6xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <a href="/" class="flex items-center gap-3 group">
+                    <div class="w-9 h-9 rounded-lg bg-indigo-600 flex items-center justify-center
+                                group-hover:bg-indigo-500 transition-colors glow-indigo">
+                        <span class="font-mono text-white font-bold text-sm">&lt;/&gt;</span>
+                    </div>
+                    <span class="font-display font-semibold text-white text-lg tracking-tight">
+                        Dev<span class="text-indigo-400">Portfolio</span>
+                    </span>
+                </a>
+
+                <!-- Desktop nav -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="/#projects" class="nav-link text-gray-400 hover:text-white text-sm font-medium transition-colors">Loyihalar</a>
+                    <a href="/#skills" class="nav-link text-gray-400 hover:text-white text-sm font-medium transition-colors">Mahoratlar</a>
+                    <a href="/#contact" class="nav-link text-gray-400 hover:text-white text-sm font-medium transition-colors">Aloqa</a>
+                    <a href="/admin/" class="px-4 py-2 rounded-lg border border-indigo-500/50 text-indigo-400
+                                            hover:bg-indigo-600 hover:text-white hover:border-indigo-600
+                                            text-sm font-medium transition-all duration-200">
+                        Admin
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button id="menuToggle" class="md:hidden text-gray-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile menu -->
+            <div id="mobileMenu" class="md:hidden hidden pt-4 pb-2 border-t border-gray-800/50 mt-4">
+                <div class="flex flex-col gap-3">
+                    <a href="/#projects" class="text-gray-400 hover:text-white py-2 text-sm">Loyihalar</a>
+                    <a href="/#skills" class="text-gray-400 hover:text-white py-2 text-sm">Mahoratlar</a>
+                    <a href="/#contact" class="text-gray-400 hover:text-white py-2 text-sm">Aloqa</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Messages -->
+    {% if messages %}
+    <div class="fixed top-24 right-6 z-50 flex flex-col gap-3 max-w-sm">
+        {% for message in messages %}
+        <div class="message-toast flex items-start gap-3 px-5 py-4 rounded-xl border
+                    {% if message.tags == 'success' %}bg-emerald-900/80 border-emerald-700/50 text-emerald-200{% else %}bg-red-900/80 border-red-700/50 text-red-200{% endif %}
+                    backdrop-blur-md shadow-2xl">
+            <span class="text-sm">{{ message }}</span>
+            <button onclick="this.parentElement.remove()" class="ml-auto opacity-70 hover:opacity-100 text-lg leading-none">&times;</button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800/50 py-10 mt-20">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded bg-indigo-600 flex items-center justify-center">
+                        <span class="font-mono text-white text-xs font-bold">&lt;/&gt;</span>
+                    </div>
+                    <span class="text-gray-400 text-sm">DevPortfolio — Django & Tailwind CSS</span>
+                </div>
+                <p class="text-gray-600 text-sm font-mono">
+                    Built with <span class="text-indigo-400">Python</span> &
+                    <span class="text-indigo-400">Django</span> ·
+                    <span class="text-gray-500">{% now "Y" %}</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Auto-remove messages
+        setTimeout(() => {
+            document.querySelectorAll('.message-toast').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transition = 'opacity 0.5s';
+                setTimeout(() => el.remove(), 500);
+            });
+        }, 4000);
+
+        // Reveal on scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, i * 80);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => observer.observe(el));
+
+        // Skill bars animation
+        const skillBars = document.querySelectorAll('.skill-bar');
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bar = entry.target;
+                    const width = bar.dataset.width;
+                    setTimeout(() => {
+                        bar.style.width = width + '%';
+                    }, 300);
+                    skillObserver.unobserve(bar);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        skillBars.forEach(bar => {
+            bar.style.width = '0%';
+            skillObserver.observe(bar);
+        });
+    </script>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

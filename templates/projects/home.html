@@ -1,0 +1,475 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Portfolio — Backend Developer{% endblock %}
+{% block meta_description %}Professional dasturchi portfoliosi — Django, Python, React va boshqa texnologiyalar{% endblock %}
+
+{% block content %}
+
+<!-- ===== HERO SECTION ===== -->
+<section class="relative min-h-screen flex items-center grid-bg">
+    <!-- Decorative blobs -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-40 -right-40 w-96 h-96 rounded-full opacity-10"
+             style="background: radial-gradient(circle, #6366f1, transparent)"></div>
+        <div class="absolute -bottom-20 -left-20 w-80 h-80 rounded-full opacity-8"
+             style="background: radial-gradient(circle, #8b5cf6, transparent)"></div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-6 pt-28 pb-20">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <!-- Left: Text -->
+            <div>
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-indigo-500/30
+                            bg-indigo-500/10 text-indigo-300 text-sm font-medium mb-8">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Ish uchun ochiqman
+                </div>
+
+                <h1 class="font-display font-bold text-5xl lg:text-6xl text-white leading-tight mb-6">
+                    Assalomu aleykum, men <br>
+                    <span class="gradient-text">Python Beckend</span><br>
+                    Dasturchi
+                </h1>
+
+                <p class="text-gray-400 text-lg leading-relaxed mb-10 max-w-lg">
+                    Python va Django backend, Vibe coding frontend texnologiyalarida professional
+                    veb-ilovalar yarataman. Toza kod, optimal arxitektura va zamonaviy UX.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-wrap gap-4 mb-12">
+                    <a href="#projects"
+                       class="px-7 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white
+                              font-semibold text-sm transition-all duration-200 glow-indigo
+                              flex items-center gap-2 group">
+                        Loyihalarni ko'rish
+                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </a>
+                    <a href="#contact"
+                       class="px-7 py-3.5 rounded-xl border border-gray-700 hover:border-indigo-500/50
+                              text-gray-300 hover:text-white font-semibold text-sm transition-all duration-200">
+                        Bog'lanish
+                    </a>
+                </div>
+
+                <!-- Stats -->
+                <div class="flex gap-8">
+                    <div>
+                        <p class="font-display font-bold text-3xl text-white">{{ total_projects }}+</p>
+                        <p class="text-gray-500 text-sm mt-1">Loyihalar</p>
+                    </div>
+                    <div class="w-px bg-gray-800"></div>
+                    <div>
+                        <p class="font-display font-bold text-3xl text-white">{{ total_skills }}+</p>
+                        <p class="text-gray-500 text-sm mt-1">Texnologiyalar</p>
+                    </div>
+                    <div class="w-px bg-gray-800"></div>
+                    <div>
+                        <p class="font-display font-bold text-3xl text-white">3+</p>
+                        <p class="text-gray-500 text-sm mt-1">Yil tajriba</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Code block decoration -->
+            <div class="hidden lg:block relative animate-float">
+                <div class="relative rounded-2xl border border-gray-700/50 overflow-hidden shadow-2xl"
+                     style="background: #0d1117;">
+                    <!-- Window bar -->
+                    <div class="flex items-center gap-2 px-5 py-4 border-b border-gray-800"
+                         style="background: #161b22;">
+                        <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                        <span class="ml-3 text-gray-500 text-xs font-mono">portfolio/views.py</span>
+                    </div>
+                    <!-- Code -->
+                    <div class="p-6 font-mono text-sm leading-7">
+                        <p><span class="text-purple-400">from</span> <span class="text-sky-300">django.shortcuts</span> <span class="text-purple-400">import</span> <span class="text-white">render</span></p>
+                        <p><span class="text-purple-400">from</span> <span class="text-sky-300">.models</span> <span class="text-purple-400">import</span> <span class="text-white">Project, Skill</span></p>
+                        <p class="mt-4"><span class="text-yellow-300">def</span> <span class="text-emerald-400">home</span><span class="text-white">(request):</span></p>
+                        <p class="ml-6"><span class="text-gray-500"># Barcha loyihalar</span></p>
+                        <p class="ml-6"><span class="text-sky-300">projects</span> <span class="text-white">= Project.objects</span></p>
+                        <p class="ml-10"><span class="text-white">.prefetch_related(</span><span class="text-amber-300">'technologies'</span><span class="text-white">)</span></p>
+                        <p class="ml-10"><span class="text-white">.all()</span></p>
+                        <p class="ml-6 mt-2"><span class="text-purple-400">return</span> <span class="text-white">render(request,</span></p>
+                        <p class="ml-10"><span class="text-amber-300">'projects/home.html'</span><span class="text-white">,</span></p>
+                        <p class="ml-10"><span class="text-white">{</span><span class="text-amber-300">'projects'</span><span class="text-white">: projects})</span></p>
+                    </div>
+                </div>
+
+                <!-- Floating badge -->
+                <div class="absolute -bottom-5 -left-5 px-4 py-3 rounded-xl border border-emerald-500/30
+                            bg-emerald-500/10 backdrop-blur-md">
+                    <div class="flex items-center gap-2">
+                        <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                        <span class="text-emerald-300 text-xs font-mono">Server running on :8000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FEATURED PROJECTS ===== -->
+{% if featured_projects %}
+<section class="py-20">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="flex items-end justify-between mb-12 reveal">
+            <div>
+                <p class="text-indigo-400 font-mono text-sm mb-2">// featured_projects</p>
+                <h2 class="font-display font-bold text-4xl text-white">Tanlangan Loyihalar</h2>
+            </div>
+            <a href="#all-projects" class="text-indigo-400 hover:text-indigo-300 text-sm flex items-center gap-1 transition-colors">
+                Hammasini ko'rish →
+            </a>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8">
+            {% for project in featured_projects %}
+            <article class="group card-hover rounded-2xl border border-gray-800/70 overflow-hidden reveal"
+                     style="background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);">
+                <!-- Image -->
+                <div class="relative h-52 overflow-hidden bg-gray-800">
+                    {% if project.image %}
+                        <img src="{{ project.image.url }}" alt="{{ project.name }}"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    {% else %}
+                        <!-- Placeholder with gradient -->
+                        <div class="w-full h-full flex items-center justify-center"
+                             style="background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%);">
+                            <div class="text-center">
+                                <div class="text-5xl font-display font-bold text-indigo-400/30">
+                                    {{ project.name|slice:":2"|upper }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <!-- Status badge -->
+                    <div class="absolute top-4 left-4">
+                        <span class="px-3 py-1 rounded-full text-xs font-medium
+                                     {% if project.status == 'completed' %}bg-emerald-500/20 text-emerald-300 border border-emerald-500/30
+                                     {% elif project.status == 'in_progress' %}bg-amber-500/20 text-amber-300 border border-amber-500/30
+                                     {% else %}bg-gray-500/20 text-gray-400 border border-gray-600{% endif %}">
+                            {{ project.get_status_display }}
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="p-7">
+                    <h3 class="font-display font-bold text-xl text-white mb-3 group-hover:text-indigo-300 transition-colors">
+                        {{ project.name }}
+                    </h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-5">
+                        {{ project.description|truncatewords:25 }}
+                    </p>
+
+                    <!-- Tags -->
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        {% for tech in project.technologies.all %}
+                        <span class="px-3 py-1 rounded-full text-xs font-medium tag-{{ tech.color|default:'indigo' }}">
+                            {{ tech.name }}
+                        </span>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="flex items-center gap-4">
+                        <a href="{{ project.get_absolute_url }}"
+                           class="flex-1 text-center px-4 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500
+                                  text-white text-sm font-medium transition-colors">
+                            Batafsil ko'rish
+                        </a>
+                        {% if project.github_link %}
+                        <a href="{{ project.github_link }}" target="_blank" rel="noopener"
+                           class="p-2.5 rounded-lg border border-gray-700 hover:border-gray-500
+                                  text-gray-400 hover:text-white transition-all"
+                           title="GitHub">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.21.08 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.17 0 0 1.01-.32 3.3 1.23.96-.27 1.98-.4 3-.4 1.02 0 2.04.13 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.87.12 3.17.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/>
+                            </svg>
+                        </a>
+                        {% endif %}
+                        {% if project.demo_link %}
+                        <a href="{{ project.demo_link }}" target="_blank" rel="noopener"
+                           class="p-2.5 rounded-lg border border-gray-700 hover:border-gray-500
+                                  text-gray-400 hover:text-white transition-all"
+                           title="Demo">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                            </svg>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- ===== ALL PROJECTS ===== -->
+<section id="projects" class="py-20 border-t border-gray-900">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="reveal mb-12">
+            <p class="text-indigo-400 font-mono text-sm mb-2">// all_projects</p>
+            <h2 class="font-display font-bold text-4xl text-white">Barcha Loyihalar</h2>
+            <p class="text-gray-400 mt-3 text-base">Mening barcha ishlarim va tajribalarim</p>
+        </div>
+
+        {% if all_projects %}
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="all-projects">
+            {% for project in all_projects %}
+            <article class="group card-hover rounded-xl border border-gray-800/70 overflow-hidden reveal"
+                     style="background: #0d1117;">
+                <!-- Image -->
+                <div class="h-44 overflow-hidden relative bg-gray-800">
+                    {% if project.image %}
+                        <img src="{{ project.image.url }}" alt="{{ project.name }}"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    {% else %}
+                        <div class="w-full h-full flex items-center justify-center"
+                             style="background: linear-gradient(135deg, #111827 0%, #1f2937 100%);">
+                            <span class="font-display font-bold text-3xl text-gray-600">
+                                {{ project.name|slice:":2"|upper }}
+                            </span>
+                        </div>
+                    {% endif %}
+                    {% if project.is_featured %}
+                    <div class="absolute top-3 right-3 px-2 py-1 rounded-md bg-indigo-600/90
+                                text-white text-xs font-medium">⭐ Featured</div>
+                    {% endif %}
+                </div>
+
+                <div class="p-6">
+                    <h3 class="font-display font-semibold text-white mb-2 group-hover:text-indigo-300 transition-colors">
+                        {{ project.name }}
+                    </h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                        {{ project.description|truncatewords:15 }}
+                    </p>
+
+                    <!-- Tags -->
+                    <div class="flex flex-wrap gap-1.5 mb-5">
+                        {% for tech in project.technologies.all|slice:":4" %}
+                        <span class="px-2.5 py-1 rounded-full text-xs tag-{{ tech.color|default:'indigo' }}">
+                            {{ tech.name }}
+                        </span>
+                        {% endfor %}
+                        {% if project.technologies.count > 4 %}
+                        <span class="px-2.5 py-1 rounded-full text-xs bg-gray-800 text-gray-500 border border-gray-700">
+                            +{{ project.technologies.count|add:"-4" }}
+                        </span>
+                        {% endif %}
+                    </div>
+
+                    <!-- Links row -->
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-800">
+                        <a href="{{ project.get_absolute_url }}"
+                           class="text-indigo-400 hover:text-indigo-300 text-sm font-medium flex items-center gap-1.5 transition-colors">
+                            Ko'rish
+                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                        <div class="flex gap-3">
+                            {% if project.github_link %}
+                            <a href="{{ project.github_link }}" target="_blank"
+                               class="text-gray-600 hover:text-white transition-colors" title="GitHub">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.21.08 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.17 0 0 1.01-.32 3.3 1.23.96-.27 1.98-.4 3-.4 1.02 0 2.04.13 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.87.12 3.17.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/>
+                                </svg>
+                            </a>
+                            {% endif %}
+                            {% if project.demo_link %}
+                            <a href="{{ project.demo_link }}" target="_blank"
+                               class="text-gray-600 hover:text-white transition-colors" title="Demo">
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                                </svg>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-20 reveal">
+            <div class="text-6xl mb-4">📂</div>
+            <p class="text-gray-500 text-lg">Hozircha loyihalar yo'q.</p>
+            <p class="text-gray-600 text-sm mt-2">Admin panelidan qo'shing.</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- ===== SKILLS ===== -->
+<section id="skills" class="py-20 border-t border-gray-900">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="reveal mb-12">
+            <p class="text-indigo-400 font-mono text-sm mb-2">// my_skills</p>
+            <h2 class="font-display font-bold text-4xl text-white">Texnik Mahoratlar</h2>
+            <p class="text-gray-400 mt-3">Ishlatiladigan texnologiyalar va tajriba darajasi</p>
+        </div>
+
+        {% if skill_categories %}
+        <div class="grid md:grid-cols-2 gap-8">
+            {% for category, skills in skill_categories.items %}
+            <div class="reveal rounded-2xl border border-gray-800/70 p-7" style="background: #0d1117;">
+                <h3 class="font-display font-semibold text-white mb-6 flex items-center gap-2">
+                    <span class="w-1.5 h-5 rounded-full bg-indigo-500"></span>
+                    {{ category }}
+                </h3>
+                <div class="space-y-5">
+                    {% for skill in skills %}
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-gray-300 text-sm font-medium">{{ skill.name }}</span>
+                            <span class="font-mono text-xs text-indigo-400">{{ skill.level }}%</span>
+                        </div>
+                        <!-- Progress bar -->
+                        <div class="h-2 rounded-full bg-gray-800 overflow-hidden">
+                            <div class="skill-bar h-full rounded-full"
+                                 data-width="{{ skill.level }}"
+                                 style="width: 0%;
+                                        background: linear-gradient(90deg,
+                                            {% if skill.level >= 80 %}#6366f1, #8b5cf6
+                                            {% elif skill.level >= 60 %}#0ea5e9, #6366f1
+                                            {% else %}#10b981, #0ea5e9{% endif %});"></div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-16 reveal">
+            <p class="text-gray-500">Hozircha mahoratlar qo'shilmagan.</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact" class="py-20 border-t border-gray-900">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-16">
+            <!-- Left -->
+            <div class="reveal">
+                <p class="text-indigo-400 font-mono text-sm mb-2">// get_in_touch</p>
+                <h2 class="font-display font-bold text-4xl text-white mb-6">Bog'lanish</h2>
+                <p class="text-gray-400 leading-relaxed mb-8">
+                    Yangi loyiha yoki hamkorlik taklifi bormi? Xabar yuboring —
+                    48 soat ichida javob beraman.
+                </p>
+
+                <!-- Contact info -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4 p-4 rounded-xl border border-gray-800/70" style="background: #0d1117;">
+                        <div class="w-10 h-10 rounded-lg bg-indigo-600/20 border border-indigo-500/30
+                                    flex items-center justify-center text-indigo-400">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-xs font-mono">Email</p>
+                            <p class="text-gray-200 text-sm">jumabayevazamat8774@gmail.com</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 p-4 rounded-xl border border-gray-800/70" style="background: #0d1117;">
+                        <div class="w-10 h-10 rounded-lg bg-indigo-600/20 border border-indigo-500/30
+                                    flex items-center justify-center text-indigo-400">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-xs font-mono">Joylashuv</p>
+                            <p class="text-gray-200 text-sm">Qoraqolpog'iston</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Form -->
+            <div class="reveal">
+                <div class="rounded-2xl border border-gray-800/70 p-8" style="background: #0d1117;">
+                    <form method="post" action="#contact" novalidate>
+                        {% csrf_token %}
+                        <div class="space-y-5">
+                            <div class="grid sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-gray-400 text-xs font-medium mb-2 font-mono">
+                                        {{ form.name.label }}
+                                    </label>
+                                    {{ form.name }}
+                                    {% if form.name.errors %}
+                                    <p class="text-red-400 text-xs mt-1">{{ form.name.errors.0 }}</p>
+                                    {% endif %}
+                                </div>
+                                <div>
+                                    <label class="block text-gray-400 text-xs font-medium mb-2 font-mono">
+                                        {{ form.email.label }}
+                                    </label>
+                                    {{ form.email }}
+                                    {% if form.email.errors %}
+                                    <p class="text-red-400 text-xs mt-1">{{ form.email.errors.0 }}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-gray-400 text-xs font-medium mb-2 font-mono">
+                                    {{ form.subject.label }}
+                                </label>
+                                {{ form.subject }}
+                                {% if form.subject.errors %}
+                                <p class="text-red-400 text-xs mt-1">{{ form.subject.errors.0 }}</p>
+                                {% endif %}
+                            </div>
+                            <div>
+                                <label class="block text-gray-400 text-xs font-medium mb-2 font-mono">
+                                    {{ form.message.label }}
+                                </label>
+                                {{ form.message }}
+                                {% if form.message.errors %}
+                                <p class="text-red-400 text-xs mt-1">{{ form.message.errors.0 }}</p>
+                                {% endif %}
+                            </div>
+                            <button type="submit"
+                                    class="w-full py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500
+                                           text-white font-semibold text-sm transition-all duration-200
+                                           glow-indigo flex items-center justify-center gap-2 group">
+                                Xabar yuborish
+                                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
