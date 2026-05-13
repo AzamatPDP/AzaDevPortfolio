@@ -1,0 +1,32 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="packaging" />
+          <option value="setuptools" />
+          <option value="wheel" />
+          <option value="numpy" />
+          <option value="pandas" />
+          <option value="python-dateutil" />
+          <option value="pytz" />
+          <option value="tzdata" />
+          <option value="six" />
+          <option value="openpyxl" />
+          <option value="aiojobs" />
+          <option value="async-timeout" />
+          <option value="Babel" />
+          <option value="charset-normalizer" />
+          <option value="environs" />
+          <option value="humanfriendly" />
+          <option value="marshmallow" />
+          <option value="python-dotenv" />
+          <option value="structlog" />
+          <option value="pyreadline3" />
+          <option value="asyncpg" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
