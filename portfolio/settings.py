@@ -32,7 +32,7 @@ INSTALLED_APPS += [
 # AWS / Supabase S3 sozlamalari
 AWS_ACCESS_KEY_ID = os.getenv('SUPABASE_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('SUPABASE_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = 'media'  # Supabase-da yaratgan bucket nomingiz
+AWS_STORAGE_BUCKET_NAME = 'myportfolio'  # Supabase-da yaratgan bucket nomingiz
 AWS_S3_REGION_NAME = 'ap-south-1'  # Loyihangiz regioniga qarab (masalan, Mumbai uchun ap-south-1)
 AWS_S3_ENDPOINT_URL = f"https://{os.getenv('SUPABASE_PROJECT_REF')}.supabase.co/storage/v1/s3"
 AWS_S3_SIGNATURE_VERSION = 's3v4'
